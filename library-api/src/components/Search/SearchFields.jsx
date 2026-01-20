@@ -1,36 +1,45 @@
-//Пользователь вводит запрос (название книги или автора). Приложение отправляет его через библиотеку Axios. Для каждой книги показать:
-
-import { useContext, useEffect } from "react";
-import { Data } from "../../api/Api";
+import { useContext, useState } from "react";
 import { BookContext } from "../context/BookContext";
 import FormInput from "../Search/FormInput";
+import { fetchBooks } from "../../api/Api";
+import { Button } from "react-bootstrap";
+import { toast } from "react-toastify";
 
-const SearchFields = () => {
-    const { books, setBooks } = useContext(BookContext);
-    const { get, send } = Data();
+export function SearchFields() {
+    const { setBooks, setLoading } = useContext(BookContext);
+    const [query, setQuery] = useState("");
 
-    useEffect(() => {
-        get.then((response) => {
-            setBooks(response.data.docs);
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        if (!query.trim()) {
+            toast.warning("Please enter a search query");
+            return;
         }
-        );
-    }
-        , []);
+
+        setLoading(true);
+        try {
+            const response = await fetchBooks(query);
+            setBooks(response.docs || []);
+        } catch (error) {
+            setBooks([]);
+            toast.error("Failed to fetch books. Please try again.");
+        }
+        finally {
+            setLoading(false);
+        }
+
+    };
 
     return (
-        <div>
+        <form onSubmit={handleSearch} className="mb-4">
             <FormInput
-                label="Search by Title"
-                placeholder="Enter book title"
-                onChange={send()}
+                label="Search Books:"
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Enter book title, author, or subject"
             />
-            <FormInput
-                label="Search by Author"
-                placeholder="Enter author name"
-                onChange={send()}
-            />
-
-        </div>
-    )
-
+            <Button type="submit" variant="primary">Search</Button>
+        </form>
+    );
 }

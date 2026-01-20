@@ -1,13 +1,18 @@
 import axios from "axios";
-export const BASE_URL = "https://openlibrary.org/search.json?";
+export const BASE_URL = "https://openlibrary.org/search.json";
 //q+harry+potter
 
-export function Data(data, url) {
+export const fetchBooks = async (query, url = BASE_URL) => {
 
-    const sendData = axios.post(url, data);
+    try {
+        const response = await axios.get(`${url}`, {
+            params: { q: query }
+        });
+        return response;
+    } catch (error) {
+        console.error("Error fetching books:", error);
+        throw error;
+    }
+};
 
-    const getData = axios.get(url);
-
-    return { sendData, getData };
-}
 

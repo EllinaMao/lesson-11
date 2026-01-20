@@ -1,9 +1,12 @@
-import {parseBook} from './utils/parseBook.jsx';
+import BookList from "./components/BooksList"
+import { SearchFields } from "./components/Search/SearchFields"
+
 function App() {
 
   return (
     <>
-      <div>{parseBook("War And Peace")}</div>
+      <SearchFields />
+      <BookList />
     </>
   )
 }
