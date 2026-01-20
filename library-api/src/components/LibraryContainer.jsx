@@ -9,20 +9,14 @@ const LibraryContainer = () => {
       style={{ maxWidth: "900px" }}
     >
       <header className="text-center mb-5">
-        <h1 className="fw-bold text-primary display-5 mb-3">
-          📚 Library Search
-        </h1>
-        <p className="text-muted fs-5">
-          Find your favorite books using Open Library API
-        </p>
+        <h1 className="fw-bold text-primary display-5 mb-3">Library Search</h1>
+        <p className="text-muted fs-5">Find your favorite books</p>
       </header>
 
       <section className="mb-4">
         <SearchFields />
       </section>
-
       <hr className="my-5 opacity-25" />
-
       <section>
         <BooksList />
       </section>
