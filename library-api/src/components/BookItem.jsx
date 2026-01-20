@@ -5,7 +5,7 @@ import { ModalFooter } from "./Modal/ModalFooter.jsx";
 import { Button, Card } from "react-bootstrap";
 
 const BookItem = ({ book }) => {
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShow] = useState(false);
 
     const { title, first_publish_year: firstPublishYear, cover_i: coverId, key } = book;
 

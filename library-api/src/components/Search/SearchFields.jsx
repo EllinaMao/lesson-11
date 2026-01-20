@@ -1,9 +1,11 @@
 import { useContext, useState } from "react";
 import { BookContext } from "../context/BookContext";
 import FormInput from "../Search/FormInput";
-import { fetchBooks } from "../../api/Api";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
+import { searchBooks } from "../../api/Api";
+
+
 
 export function SearchFields() {
     const { setBooks, setLoading } = useContext(BookContext);
@@ -17,9 +19,14 @@ export function SearchFields() {
         }
 
         setLoading(true);
+        setBooks([]);
+
         try {
-            const response = await fetchBooks(query);
-            setBooks(response.docs || []);
+            const response = await searchBooks(query);
+            if (!response || response.length === 0) {
+                toast.info("No results found.");
+            }
+            setBooks(response || []);
         } catch (error) {
             setBooks([]);
             toast.error("Failed to fetch books. Please try again.");

@@ -1,18 +1,17 @@
 import axios from "axios";
-export const BASE_URL = "https://openlibrary.org/search.json";
-//q+harry+potter
+import { toast } from "react-toastify";
+import { parceBook } from '../utils/parseBook.jsx';
 
-export const fetchBooks = async (query, url = BASE_URL) => {
+const BASE_URL = "https://openlibrary.org/search.json";
 
+export const searchBooks = async (query) => {
     try {
-        const response = await axios.get(`${url}`, {
-            params: { q: query }
-        });
-        return response;
+        const url = `${BASE_URL}?q=${parceBook(query)}`;
+        const response = await axios.get(url);
+        return response.data.docs;
     } catch (error) {
-        console.error("Error fetching books:", error);
+        console.error("Error searching books:", error);
+        toast.error("Error searching books. Please try again later.");
         throw error;
     }
 };
-
-
