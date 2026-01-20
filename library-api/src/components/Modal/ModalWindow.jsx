@@ -1,5 +1,5 @@
-import { Portal } from '../portal/Portal';
-import { PORTAL_LAYERS } from '../portal/PORTAL_LAYERS';
+import { Portal } from '../portals/Portal';
+import { PORTAL_LAYERS } from '../portals/PORTAL_LAYERS.js';
 import { Modal } from 'react-bootstrap';
 
 
@@ -11,7 +11,7 @@ export function ModalWindow({
     children,
     header = null,
     footer = null,
-    portalId = PORTAL_LAYERS.modal,
+    portalId = PORTAL_LAYERS.MODAL,
     ...props
 }) {
     return (

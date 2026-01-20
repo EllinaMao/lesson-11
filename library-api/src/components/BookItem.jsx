@@ -20,7 +20,7 @@ const BookItem = ({ book }) => {
 
     return (
         <>
-            <Card className="h-100 shadow-sm">
+            <Card className="h-100 shadow-sm" style={{ width: '200px', minHeight: '350px', maxHeight: '450px' }}>
                 <Card.Img variant="top" src={coverUrl} alt={title} />
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>
@@ -28,7 +28,7 @@ const BookItem = ({ book }) => {
                     <Card.Text>First Published: {firstPublishYear || "N/A"}</Card.Text>
                     <Button variant="primary" className="mt-auto" onClick={handleShow}>View Details</Button>
                 </Card.Body>
-            </Card>
+            </Card >
             {showModal && (
                 <ModalWindow onClose={handleClose}>
                     <ModalHeader closeButton>
@@ -50,10 +50,13 @@ const BookItem = ({ book }) => {
                         <Button variant="secondary" onClick={handleClose}>Close</Button>
                     </ModalFooter>
                 </ModalWindow>
-            )}
+            )
+            }
 
         </>
     )
 
 
 }
+
+export default BookItem;
