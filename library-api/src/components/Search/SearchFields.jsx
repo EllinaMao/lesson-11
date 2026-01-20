@@ -43,7 +43,7 @@ export default function SearchFields() {
     };
 
     return (
-        <form onSubmit={handleSearch} className="mb-4">
+        <form onSubmit={handleSearch} className="">
             <FormInput
                 label="Search Books:"
                 type="text"

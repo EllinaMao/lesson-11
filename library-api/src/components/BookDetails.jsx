@@ -4,8 +4,9 @@ import { ModalFooter } from "./Modal/ModalFooter.jsx";
 import { Button } from "react-bootstrap";
 
 
-const BookDetails = ({ show, handleClose, title, coverUrl, author, year, book }) => {
+const BookDetails = ({ show, handleClose, title, coverUrl, author, year, isbn, language }) => {
     return (
+        
         <ModalWindow show={show} onHide={handleClose}>
         <ModalHeader closeButton onHide={handleClose}>
           <h3>{title}</h3>
@@ -21,11 +22,11 @@ const BookDetails = ({ show, handleClose, title, coverUrl, author, year, book })
               <strong>Year:</strong> {year}
             </p>
             <p>
-              <strong>ISBN:</strong> {book.isbn ? book.isbn[0] : "N/A"}
+              <strong>ISBN:</strong> {isbn ? isbn[0] : "N/A"}
             </p>
             <p>
               <strong>Language:</strong>{" "}
-              {book.language ? book.language.join(", ") : "N/A"}
+              {language ? language.join(", ") : "N/A"}
             </p>
           </div>
         </div>

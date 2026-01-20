@@ -3,6 +3,7 @@ import { Card, Button } from "react-bootstrap";
 import BookDetails from "./BookDetails.jsx";
 
 const BookItem = ({ book }) => {
+  if (!book) return null;
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -15,14 +16,16 @@ const BookItem = ({ book }) => {
     key,
   } = book;
 
-  const displayedAuthors =
-    book.author_name.length > 2
-      ? book.author_name.slice(0, 2).join(", ")
-      : "Unknown Author";
+  const authorsList = book.author_name || [];
+  const displayedAuthors = authorsList.slice(0, 2).join(", ");
+  const remainingCount = authorsList.length - 2;
 
-  const author = book.author_name
-    ? book.author_name.join(", ")
-    : "Unknown Author";
+  const authorDisplay =
+    remainingCount > 0
+      ? `${displayedAuthors} (+ ${remainingCount} others)`
+      : authorsList.join(", ") || "Unknown Author";
+
+  const fullAuthorList = authorsList.join(", ") || "Unknown Author";
 
   const year = book.first_publish_year || "N/A";
 
@@ -48,7 +51,7 @@ const BookItem = ({ book }) => {
             style={{ height: "100px" }}
           >
             <Card.Text>
-              <strong>Author:</strong> {displayedAuthors} <br />
+              <strong>Author:</strong> {authorDisplay} <br />
               <strong>Year:</strong> {firstPublishYear}
             </Card.Text>
           </div>
@@ -59,16 +62,16 @@ const BookItem = ({ book }) => {
         </Card.Body>
       </Card>
 
-        <BookDetails 
-            show={show}
-            handleClose={handleClose}
-            title={title}
-            coverUrl={coverUrl}
-            author={author}
-            year={year}
-            book={book}
-        />
-
+      <BookDetails
+        show={show}
+        handleClose={handleClose}
+        title={title}
+        coverUrl={coverUrl}
+        author={fullAuthorList}
+        year={year}
+        isbn={book.isbn}
+        language={book.language}
+      />
     </>
   );
 };
