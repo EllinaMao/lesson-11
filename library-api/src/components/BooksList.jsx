@@ -4,7 +4,7 @@ import { BookContext } from "./context/BookContext";
 import { Spinner, Alert } from "react-bootstrap";
 import BookItem from "./BookItem";
 
-const BookList = () => {
+const BooksList = () => {
     const { books, loading } = useContext(BookContext);
     if (loading) {
         return (
@@ -27,4 +27,4 @@ const BookList = () => {
     );
 };
 
-export default BookList;
+export default BooksList;

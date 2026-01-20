@@ -7,7 +7,7 @@ import { searchBooks } from "../../api/Api";
 
 
 
-export function SearchFields() {
+export default function SearchFields() {
     const { setBooks, setLoading } = useContext(BookContext);
     const [query, setQuery] = useState("");
 
@@ -15,6 +15,11 @@ export function SearchFields() {
         e.preventDefault();
         if (!query.trim()) {
             toast.warning("Please enter a search query");
+            return;
+        }
+
+        if(query.length < 3) {
+            toast.warning("Search query must be at least 3 characters long");
             return;
         }
 
